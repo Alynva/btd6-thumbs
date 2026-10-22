@@ -685,7 +685,7 @@ const STORAGE_KEY = "yt_thumbnail_generator";
       const img =
         document.createElement("img");
 
-      img.loading = "eager";
+      img.loading = "lazy";
 
       img.decoding = "async";
 
