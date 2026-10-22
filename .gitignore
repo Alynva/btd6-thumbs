@@ -1,0 +1,15 @@
+# Zip archives
+*.zip
+
+# Operating System files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Logs and temporary files
+*.log
+__pycache__/
+
+# Scratch scripts
+*.py

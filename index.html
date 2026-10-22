@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTD6 Thumbnail Generator</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+    
+  <body>
+    <div class="desktop-sidebar">
+      <div class="sidebar-title">
+        Fundos
+      </div>
+
+      <div class="sidebar-content" id="backgroundList"></div>
+    </div>
+
+    <div class="desktop-sidebar">
+      <div class="sidebar-title">
+        Personagens
+      </div>
+
+      <div class="sidebar-content" id="characterList"></div>
+    </div>
+
+    <div class="main">
+
+      <div class="topbar">
+
+        <input
+          id="titleInput"
+          placeholder="Título"
+          value="DESAFIO AVANÇADO"
+        />
+
+        <input
+          id="dateInput"
+          placeholder="Data"
+          value="29 DE MAIO"
+        />
+
+        <input
+          id="pathInput"
+          placeholder="Caminho"
+          value="0-0-0"
+          pattern="[0-5]-[0-5]-[0-5]"
+        />
+
+        <input
+          type="file"
+          id="logoInput"
+          accept="image/*"
+        />
+
+        <button id="copyBtn">
+          Copiar
+        </button>
+
+        <button id="downloadBtn">
+          Baixar
+        </button>
+
+      </div>
+
+      <div class="preview-wrapper">
+        <canvas
+          id="canvas"
+          width="1280"
+          height="720"
+        ></canvas>
+      </div>
+
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+  
+</html>
