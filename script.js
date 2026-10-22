@@ -3341,7 +3341,7 @@ const STORAGE_KEY = "yt_thumbnail_generator";
       targetHeight
     );
 
-    ctx.font = "400 92px Luckiest Guy";
+    ctx.font = '400 92px "Luckiest Guy", cursive, sans-serif';
     ctx.textBaseline = "top";
     ctx.lineWidth = 18;
     ctx.strokeStyle = "rgba(0,0,0,.9)";
@@ -3442,7 +3442,7 @@ const STORAGE_KEY = "yt_thumbnail_generator";
 	const pathX = charX + charWidth/2
 	const pathY = charY + targetHeight - 120
 	  
-    ctx.font = "400 92px Luckiest Guy";
+    ctx.font = '400 92px "Luckiest Guy", cursive, sans-serif';
     ctx.textBaseline = "top";
     ctx.lineWidth = 18;
     ctx.strokeStyle = "rgba(0,0,0,.9)";
@@ -3589,6 +3589,17 @@ const STORAGE_KEY = "yt_thumbnail_generator";
     );
 
   async function initialize() {
+
+    try {
+      await document.fonts.load('400 92px "Luckiest Guy"');
+      await document.fonts.ready;
+    } catch (e) {
+      console.warn("Font loading error:", e);
+    }
+
+    if (document.fonts) {
+      document.fonts.ready.then(() => render());
+    }
 
     initializeBackgrounds();
 
