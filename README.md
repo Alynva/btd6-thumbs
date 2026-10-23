@@ -6,7 +6,7 @@ Originado a partir da criação de [Alisson Nunes no CodePen](https://codepen.io
 
 ## Recursos
 
-- **Planos de Fundo (Mapas)**: 85 mapas organizados por dificuldade, com armazenamento local.
+- **Planos de Fundo (Mapas)**: 86 mapas organizados por dificuldade, com armazenamento local.
 - **Personagens (Torres e Heróis)**: 536 imagens com todas as ramificações e tiers.
 - **Edição em Tempo Real**: Altere título, data e caminho (ex: 0-0-0) com pré-visualização instantânea no `<canvas>`.
 - **Upload de Logo**: Suporte para carregar logo ou imagem personalizada.

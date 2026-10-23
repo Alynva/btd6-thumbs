@@ -412,11 +412,10 @@ const STORAGE_KEY = "yt_thumbnail_generator";
     "difficulty": "Avançado"
   },
   {
-    "image": null,
+    "image": "./images/backgrounds/Mushroom_Grotto_No_UI.png",
     "en": "Mushroom Grotto",
     "pt": "Gruta dos Cogumelos",
-    "difficulty": "Avançado",
-    "inativo": true
+    "difficulty": "Avançado"
   },
   {
     "image": "./images/backgrounds/MapSelectPartyParadeButton.png",
