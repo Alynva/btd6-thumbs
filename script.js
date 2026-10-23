@@ -3551,16 +3551,52 @@ const STORAGE_KEY = "yt_thumbnail_generator";
       "click",
       () => {
 
-        const a =
-          document.createElement("a");
+        canvas.toBlob(
+          async blob => {
 
-        a.href =
-          canvas.toDataURL("image/png");
+            if (!blob) {
+              alert("Não foi possível gerar a imagem.");
+              return;
+            }
 
-        a.download =
-          "thumbnail.png";
+            const filename = "thumbnail.png";
+            const file = new File([blob], filename, { type: "image/png" });
 
-        a.click();
+            // No iOS (iPhone/iPad) e dispositivos móveis, o navigator.share abre o menu
+            // nativo de compartilhamento onde o usuário pode clicar em "Salvar Imagem" (fotos)
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+              try {
+                await navigator.share({
+                  files: [file],
+                  title: titleInput.value || "Thumbnail BTD6"
+                });
+                return;
+              } catch (err) {
+                if (err.name === "AbortError") {
+                  return;
+                }
+                console.warn("navigator.share falhou, usando fallback:", err);
+              }
+            }
+
+            // Fallback padrão com Blob URL para desktop ou quando share não disponível
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.style.display = "none";
+            a.href = url;
+            a.download = filename;
+            a.rel = "noopener";
+            document.body.appendChild(a);
+            a.click();
+
+            setTimeout(() => {
+              document.body.removeChild(a);
+              URL.revokeObjectURL(url);
+            }, 2000);
+
+          },
+          "image/png"
+        );
 
       }
     );
@@ -3571,19 +3607,43 @@ const STORAGE_KEY = "yt_thumbnail_generator";
       "click",
       async () => {
 
-        canvas.toBlob(
-          async blob => {
+        try {
+          // No Safari / iOS, passar uma Promise no ClipboardItem preserva
+          // a ativação do usuário durante a geração assíncrona do blob.
+          const item = new ClipboardItem({
+            "image/png": new Promise((resolve, reject) => {
+              canvas.toBlob(blob => {
+                if (blob) resolve(blob);
+                else reject(new Error("Falha ao gerar blob do canvas"));
+              }, "image/png");
+            })
+          });
 
-            await navigator.clipboard.write([
-              new ClipboardItem({
-                [blob.type]: blob
-              })
-            ]);
+          await navigator.clipboard.write([item]);
+          alert("Imagem copiada!");
 
-            alert("Imagem copiada!");
+        } catch (err) {
 
-          }
-        );
+          console.warn("ClipboardItem com Promise falhou, tentando fallback tradicional:", err);
+
+          canvas.toBlob(
+            async blob => {
+              if (!blob) return;
+              try {
+                await navigator.clipboard.write([
+                  new ClipboardItem({
+                    [blob.type]: blob
+                  })
+                ]);
+                alert("Imagem copiada!");
+              } catch (e) {
+                alert("Não foi possível copiar para a área de transferência no seu navegador.");
+              }
+            },
+            "image/png"
+          );
+
+        }
 
       }
     );
