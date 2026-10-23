@@ -81,6 +81,11 @@
     width: 100%;
     display: block;
     object-fit: cover;
+    aspect-ratio: 16 / 10;
+  }
+
+  #characterList .thumb-option img {
+    aspect-ratio: 1 / 1;
   }
 
   .thumb-label {
@@ -221,6 +226,7 @@
 
     .thumb-option img {
       height: 100%;
+      aspect-ratio: auto;
     }
 
     .character-step-header {
